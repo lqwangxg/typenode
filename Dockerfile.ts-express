@@ -1,0 +1,5 @@
+FROM lqwangxg/node:alpine AS vuecli
+WORKDIR /app
+VOLUME /app
+RUN npm install -g typescript @types/node ts-node \
+  && tsc --init 
