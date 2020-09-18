@@ -1,4 +1,4 @@
-FROM lqwangxg/node:alpine AS builder
+FROM lqwangxg/node AS builder
 WORKDIR /app
 RUN npm install -g @vue/cli @vue/cli-service-global 
 COPY package*.json /app/
