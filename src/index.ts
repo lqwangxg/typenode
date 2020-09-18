@@ -1,6 +1,7 @@
 import express from 'express'
 
 const app: express.Express = express()
+const port = 3000
 
 // CORSの許可
 app.use((req, res, next) => {
@@ -39,4 +40,4 @@ router.post('/api/postTest', (req:express.Request, res:express.Response) => {
 app.use(router)
 
 // 3000番ポートでAPIサーバ起動
-app.listen(3000,()=>{ console.log('Example app listening on port 3000!') })
+app.listen(port,()=>{ console.log(`webserver started at http://localhost:${port}`) })
