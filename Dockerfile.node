@@ -1,0 +1,6 @@
+FROM alpine
+RUN apk update \
+ && apk add --update npm \
+ && rm -rf /var/cache/apk/
+WORKDIR /app
+CMD ["npm", "-v"]

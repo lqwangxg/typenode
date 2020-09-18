@@ -13,8 +13,14 @@ app.use((req, res, next) => {
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+// for static files. like html, js, css, img and so on.
+app.use('/static', express.static(__dirname + '/public'));
+
 // GetとPostのルーティング
 const router: express.Router = express.Router()
+router.get('/', (req:express.Request, res:express.Response) => {
+  res.send("hello, this is the default page.")
+})
 router.get('/api/getTest', (req:express.Request, res:express.Response) => {
   res.send(req.query)
 })
