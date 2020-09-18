@@ -12,6 +12,15 @@ app.use((req, res, next) => {
 // body-parserに基づいた着信リクエストの解析
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+// simple logger
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.log('%s %s', req.method, req.url);
+  next();
+});
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err);
+  next(err);
+})
 
 // for static files. like html, js, css, img and so on.
 app.use('/static', express.static(__dirname + '/public'));
@@ -22,10 +31,10 @@ router.get('/', (req:express.Request, res:express.Response) => {
   res.send("hello, this is the default page.")
 })
 router.get('/api/getTest', (req:express.Request, res:express.Response) => {
-  res.send(req.query)
+  res.json(req.query)
 })
 router.post('/api/postTest', (req:express.Request, res:express.Response) => {
-  res.send(req.body)
+  res.json(req.body)
 })
 app.use(router)
 
