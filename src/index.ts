@@ -1,21 +1,26 @@
 import express from 'express'
 import path from "path"
+import dotenv from "dotenv"
+
+// initialize configuration
+dotenv.config()
 
 const app: express.Express = express()
-const port = 3000
+//const port = 3000
+const port = process.env.SERVER_PORT
 
 // Configure Express to use EJS
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
 
-// CORSの許可
+// CORS permission
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
   next()
 })
 
-// body-parserに基づいた着信リクエストの解析
+// body-parser for request and response 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 // simple logger
