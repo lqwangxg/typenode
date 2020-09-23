@@ -1,7 +1,12 @@
 import express from 'express'
+import path from "path"
 
 const app: express.Express = express()
 const port = 3000
+
+// Configure Express to use EJS
+app.set("views", path.join(__dirname, "views"))
+app.set("view engine", "ejs")
 
 // CORSの許可
 app.use((req, res, next) => {
@@ -29,7 +34,8 @@ app.use('/static', express.static(__dirname + '/public'));
 // GetとPostのルーティング
 const router: express.Router = express.Router()
 router.get('/', (req:express.Request, res:express.Response) => {
-  res.send("hello, this is the default page.")
+  res.render("index")
+  //res.send("hello, this is the default page.")
 })
 router.get('/api/getTest', (req:express.Request, res:express.Response) => {
   res.json(req.query)
