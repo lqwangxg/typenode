@@ -13,6 +13,7 @@ if [ $? = 1 ]; then
  npm install --save-dev typescript @types/node@12 \
  npm install --save-dev ts-node nodemon rimraf npm-run-all \
  npm install --save-dev dev @types/dotenv \
+ npm install --save-dev express-session @types/express-session \
  npm install --save-dev fs-extra @types/fs-extra \
  npm install --save-dev shelljs @types/shelljs
 else
