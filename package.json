@@ -25,10 +25,12 @@
   },
   "homepage": "https://github.com/lqwangxg/typenode#readme",
   "devDependencies": {
+    "@types/express-session": "^1.17.0",
     "@types/fs-extra": "^9.0.1",
     "@types/node": "^12.12.62",
     "@types/shelljs": "^0.8.8",
     "ejs": "^3.1.5",
+    "express-session": "^1.17.1",
     "fs-extra": "^9.0.1",
     "install": "^0.13.0",
     "nodemon": "^2.0.4",
