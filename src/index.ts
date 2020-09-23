@@ -2,11 +2,12 @@ import express from 'express'
 import path from "path"
 import dotenv from "dotenv"
 
+import * as sessionAuth from "./midware/sessionAuth"
+
 // initialize configuration
 dotenv.config()
 
 const app: express.Express = express()
-//const port = 3000
 const port = process.env.SERVER_PORT
 
 // Configure Express to use EJS
