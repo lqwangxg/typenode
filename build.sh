@@ -20,9 +20,9 @@ fi
 
 echo "STEP2: CHECK BUILD CONTAINER, IF NOT FOUND, START A NEW ONE."
 # check build container. if not found start a new
-# cid=`docker ps -a | grep $builder_container_name | awk '{print $1}'`
+# cid=`docker ps -a | grep $container_name | awk '{print $1}'`
 # if [ -z "$cid" ]; then 
-#  echo "docker container $builder_container_name is not found, start a new container.";
+#  echo "docker container $container_name is not found, start a new container.";
   
   ls | grep node_modules
   if [ $? = 1 ]; then  
@@ -42,8 +42,8 @@ echo "STEP2: CHECK BUILD CONTAINER, IF NOT FOUND, START A NEW ONE."
     npm run build
   echo "npm run build completed."
 # else 
-#   echo "docker container $builder_container_name is found, start it";
-#   docker start $builder_container_name    
+#   echo "docker container $container_name is found, start it";
+#   docker start $container_name    
 # fi
 
 echo "STEP3: CHECK SOURCE BUILD RESULT, IF NO ERROR, BUILD DOCKER DEPLOY IMAGE."
