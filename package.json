@@ -4,11 +4,12 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "tsc": "tsc",
-    "dev": "ts-node src/index.ts",
-    "dev:watch": "ts-node-dev --respawn src/index.ts",
     "clean": "rimraf dist/*",
-    "build": "npm-run-all clean tsc",
+    "copy-assets": "ts-node tools/copyAssets",
+    "tsc": "tsc",
+    "build": "npm-run-all clean tsc copy-assets",
+    "dev:start": "npm-run-all build start",
+    "dev": "nodemon --watch src -e ts,ejs --exec npm run dev:start",
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
