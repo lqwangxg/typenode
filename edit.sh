@@ -3,18 +3,15 @@ if [ -z "$sh_cmd" ]; then
   sh_cmd="sh"
 fi
 echo "sh_cmd:$sh_cmd"
-app_name=$2
-if [ -z "$app_name" ]; then 
-  app_name=`pwd`
-fi
+
+app_name=`pwd`
+
 echo "app_name root path:$app_name"
 
-docker_image_name="lqwangxg/ts-express"
-docker images | grep "$docker_image_name"
-if [ $? = 1 ]; then 
-  echo "[$docker_image_name] is not found. create a new image..."
-  docker build -t $docker_image_name -f Dockerfile.builder .  
-fi
+docker_image_name="lqwangxg/node"
+
+./install.sh
+
 echo "docker run $docker_image_name ... "
 docker run -it --rm \
 -p $RANDOM:3000 \
