@@ -37,7 +37,7 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 // for static files. like html, js, css, img and so on.
 app.use('/static', express.static(__dirname + '/public'));
 
-sessionAuth.register(app)
+//sessionAuth.register(app)
 
 // GetとPostのルーティング
 const router: express.Router = express.Router()
@@ -45,6 +45,10 @@ router.get('/', (req:express.Request, res:express.Response) => {
   res.render("index")
   //res.send("hello, this is the default page.")
 })
+router.get('/home', (req:express.Request, res:express.Response) => {
+  res.render("home")
+})
+
 router.get('/api/getTest', (req:express.Request, res:express.Response) => {
   res.json(req.query)
 })
