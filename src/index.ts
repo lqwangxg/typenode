@@ -37,6 +37,8 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 // for static files. like html, js, css, img and so on.
 app.use('/static', express.static(__dirname + '/public'));
 
+sessionAuth.register(app)
+
 // GetとPostのルーティング
 const router: express.Router = express.Router()
 router.get('/', (req:express.Request, res:express.Response) => {
