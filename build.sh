@@ -1,5 +1,5 @@
 # define variables
-builder_name="lqwangxg/ts-dev"
+builder_name="lqwangxg/ts-express"
 app_name=$1
 if [ -z "$app_name" ]; then 
   app_name=`pwd`  

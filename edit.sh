@@ -13,7 +13,7 @@ docker_image_name="lqwangxg/ts-express"
 docker images | grep "$docker_image_name"
 if [ $? = 1 ]; then 
   echo "[$docker_image_name] is not found. create a new image..."
-  docker build -t $docker_image_name -f Dockerfile.ts-express .  
+  docker build -t $docker_image_name -f Dockerfile.builder .  
 fi
 echo "docker run $docker_image_name ... "
 docker run -it --rm \
