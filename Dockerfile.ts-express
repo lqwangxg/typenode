@@ -1,5 +1,5 @@
 FROM lqwangxg/node AS vuecli
 WORKDIR /app
 VOLUME /app
-RUN npm install -g typescript @types/node ts-node \
+RUN npm install -g typescript @types/node ts-node -D ts-node-dev \
   && tsc --init 

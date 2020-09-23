@@ -17,6 +17,7 @@ if [ $? = 1 ]; then
 fi
 echo "docker run $docker_image_name ... "
 docker run -it --rm \
+-p 3000:3000 \
 -v $app_name:/app \
 -v ~/npm/:/root/.npm/ \
 $docker_image_name \

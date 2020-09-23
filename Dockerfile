@@ -1,7 +1,6 @@
 FROM lqwangxg/node AS builder
 WORKDIR /app
-RUN npm install -g @vue/cli @vue/cli-service-global 
-COPY package*.json /app/
+OPY package*.json /app/
 RUN npm install
 COPY . /app/
 RUN npm run build
