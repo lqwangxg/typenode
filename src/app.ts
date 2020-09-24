@@ -11,7 +11,10 @@ import passport from "passport"
 import bluebird from "bluebird"
 import morgan from "morgan"
 
+import logger from "./util/logger"
 import { MONGODB_URI, SESSION_SECRET } from "./util/secrets"
+
+logger.debug("MONGODB_URI="+MONGODB_URI + ", SESSION_SECRET="+SESSION_SECRET)
 const MongoStore = mongo(session)
 
 // Controllers (route handlers)
@@ -25,9 +28,6 @@ const MongoStore = mongo(session)
 //import passportlocal from "passport-local"
 //import passportFacebook from "passport-facebook"
 
-// initialize configuration
-//import dotenv from "dotenv"
-//dotenv.config()
 
 const app: express.Express = express()
 
@@ -49,14 +49,17 @@ if (MONGODB_URI){
   app.use(session({
     resave: true,
     saveUninitialized: true,
-    secret: SESSION_SECRET,
+    secret: "my-secret",
     store: new MongoStore({
       url: MONGODB_URI,
       autoReconnect: true
     })
   }))
 }else{
-  app.use(session({ secret: SESSION_SECRET, cookie: { maxAge: 60000 }}))
+  app.use(session({ 
+    secret: "cookie-secret",
+    cookie: { maxAge: 60000 }
+  }))
 }
 
 app.set("port", process.env.SERVER_PORT || 3000)
