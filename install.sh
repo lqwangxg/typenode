@@ -7,7 +7,7 @@ if [ $? = 1 ]; then
  echo "not found node_modules, npm install ... "
  docker run -it --rm \
  -v $app_name:/app \
- -v ~/npm/:/root/.npm/ \
+ -v ~/.npm/:/root/.npm/ \
  $docker_image_name \
  npm install 
 # npm install --save-dev typescript @types/node@12 \

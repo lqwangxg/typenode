@@ -117,10 +117,10 @@ app.use('/static', express.static(__dirname + '/public'));
 /**
  * Primary app routes 
  */
-app.get("/", homeController.index)
+//app.get("/", homeController.index)
 //import userRouter from "./route/user.ts"
 //import contactRouter from "./route/contact.ts"
 //app.use("/user", userRouter)
 //app.use("/contact",contactRouter)
 
-expert default app
+export default app;

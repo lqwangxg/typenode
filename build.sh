@@ -4,14 +4,26 @@ app_name=`pwd`
 
 echo "app_name root path:$app_name"
 
-./install.sh  
-
-docker run -it --rm \
+./install.sh 2>&1 | tee install.log | grep -i error
+ 
+if [ $? = 1 ]; then 
+  docker run -it --rm \
     -w /app \
     -v $app_name:/app \
-    -v ~/npm/:/root/.npm/ \
+    -v ~/.npm/:/root/.npm/ \
     $builder_name \
-    npm run build
-echo "npm run build completed."
+    npm run build 2>&1 | tee build.log | grep -i error
+  
+  if [ $? = 1 ]; then 
+    echo "npm run build completed."
+  else
+    echo "npm run build error happened."
+  fi
+else
+  echo "npm install error happened."
+fi
 
-./deploy.sh
+if [ $? = 1 ]; then  
+  echo "---deploy start...----"
+  ./deploy.sh
+fi

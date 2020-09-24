@@ -16,6 +16,6 @@ echo "docker run $docker_image_name ... "
 docker run -it --rm \
 -p $RANDOM:3000 \
 -v $app_name:/app \
--v ~/npm/:/root/.npm/ \
+-v ~/.npm/:/root/.npm/ \
 $docker_image_name \
 $sh_cmd
