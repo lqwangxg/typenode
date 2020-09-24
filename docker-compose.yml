@@ -12,6 +12,29 @@ services:
 
   pg-db:
     image: postgres
+    container_name: postgresql
     ports:
       - "5432:5432"
+    volumes:
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    enviroment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pAssword
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    hostname: postgres
+    restart: always
+    user: root
+  
+  pgadmin4:
+    image: dpage/pgadmin4
+    container_name:pgadmin4
+    port:
+      - 80:80
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin/storage
+    enviroment:
+      PGADMIN_DEFAULT_EMAIL: root
+      PGADMIN_DEFAULT_PASSWORD: pAssword
+    hostname: pgadmin4
+    restart: always
 
