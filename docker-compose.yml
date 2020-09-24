@@ -17,7 +17,7 @@ services:
       - "5432:5432"
     volumes:
       - ./postgres/init:/docker-entrypoint-initdb.d
-    enviroment:
+    environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: pAssword
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
@@ -27,14 +27,13 @@ services:
   
   pgadmin4:
     image: dpage/pgadmin4
-    container_name:pgadmin4
-    port:
+    container_name: pgadmin4
+    ports:
       - 80:80
     volumes:
       - ./pgadmin:/var/lib/pgadmin/storage
-    enviroment:
+    environment:
       PGADMIN_DEFAULT_EMAIL: root
       PGADMIN_DEFAULT_PASSWORD: pAssword
     hostname: pgadmin4
     restart: always
-
