@@ -24,6 +24,7 @@ import bluebird from "bluebird"
 import morgan from "morgan"
 import logger from "./util/logger"
 
+import userRouter from "./routes/index"
 
 const app: express.Express = express()
 
@@ -62,6 +63,8 @@ app.use(lusca.xssProtection(true))
 
 // for static files. like html, js, css, img and so on.
 app.use(express.static(__dirname + '/public'));
+
+app.use("/user", userRouter)
 
 // GET method route
 app.get('/', function (req, res) {
