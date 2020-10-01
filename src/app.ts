@@ -63,21 +63,39 @@ app.use(lusca.xssProtection(true))
 // for static files. like html, js, css, img and so on.
 app.use(express.static(__dirname + '/public'));
 
-const router = express.Router()
-router.get('helloworld', (req: express.Request, res: express.Response) =>{
+// GET method route
+app.get('/', function (req, res) {
+  res.send('GET request to the homepage')
+})
+
+// POST method route
+app.post('/', function (req, res) {
+  res.send('POST request to the homepage')
+})
+app.get('/ab?cd', function (req, res) {
+  res.send('ab?cd')
+})
+app.get('/ab*cd', function (req, res) {
+  res.send('ab*cd')
+})
+app.get(/.*fly$/, function (req, res) {
+  res.send('/.*fly$/')
+})
+app.get('/users/:userId/books/:bookId', function (req, res) {
+  res.send(req.params)
+})
+
+//const router = express.Router()
+app.get('/', (req: express.Request, res: express.Response) =>{
+   res.render('index')
+})
+app.get('/api', (req: express.Request, res: express.Response) =>{
   res.status(200)
   res.send({message: 'hello, world. this is from express typescript applicatoin.'})
 })
 
-app.use((req: express.Request, res: express.Response) =>{
-  res.status(404)
-  res.send({
-    param: {
-      status: 404,
-      message: 'not found'
-    }
-  })
+app.get('/home', (req: express.Request, res: express.Response) =>{
+  res.render('home')
 })
-
 
 export default app;
