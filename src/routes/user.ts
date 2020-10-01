@@ -1,16 +1,15 @@
-import * as express from "express"
+import express from "express"
+//import {TestSevice} from "../services/TestService"
 
-export const register = (app: express.Application) => {
-  const oid = "123456"
-
-  app.get("/", (req: express.Request, res: express.Response) => {
-    res.render("index")
+export default const register = (app: express.Application) => {
+  
+  app.get("/all", (req: express.Request, res: express.Response) => {
+    res.status(200).send({ message:"there are a lot users. :)"  })
+    
+  })
+  app.post("/detail", (req: express.Request, res: express.Response) => {
+    res.status(200).send({ "username":"lqwangxg", "age":20  })
   })
 
-  app.get("/login", (req, res) => {
-    res.redirect("home")
-  })
-  app.get("/logout",(req, res) =>{
-    res.redirect("/")
-  })
+
 }

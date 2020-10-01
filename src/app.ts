@@ -31,8 +31,6 @@ app.set("port", process.env.SERVER_PORT || 3000)
 app.set("mode", process.env.MODE || 'development')
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
-//app.set("view engine", "pug")
-
  
 // options: combined,common,dev,short,tiny
 app.use(morgan("combined"))
@@ -59,5 +57,21 @@ app.use(lusca.xssProtection(true))
 
 // for static files. like html, js, css, img and so on.
 app.use('/static', express.static(__dirname + '/public'));
+
+const router = express.Router()
+router.get('helloworld', (req, res) =>{
+  res.status(200)
+  res.send({message: 'hello, world. this is from express typescript applicatoin.'})
+})
+
+app.use((res, req) =>{
+  res.status(404)
+  res.render( 'error', {
+    param: {
+      status: 404,
+      message: 'not found'
+    }
+  })
+})
 
 export default app;

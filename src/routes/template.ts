@@ -1,15 +1,15 @@
 import * as express from "express"
 
 export const register = (app: express.Application) => {
-  const oid = "123456"
 
   app.get("/", (req: express.Request, res: express.Response) => {
-    res.render("index")
+    res.send({"token": 123456789 })
   })
 
   app.get("/login", (req, res) => {
-    res.redirect("home")
+    res.redirect("/login")
   })
+
   app.get("/logout",(req, res) =>{
     res.redirect("/")
   })
