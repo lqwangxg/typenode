@@ -24,9 +24,29 @@ import bluebird from "bluebird"
 import morgan from "morgan"
 import logger from "./util/logger"
 
+// For Router
 import userRouter from "./routes/index"
 
+// For .env parameters.
+import { MONGODB_URI, SESSION_SECRET } from "./util/secrets"
+
 const app: express.Express = express()
+
+const MongoStore = mongo(session)
+const mongoUrl = MONGODB_URI;
+mongoose.Promise = bluebird;
+mongoose.connect(mongoUrl, 
+  { 
+    useNewUrlParser: true, 
+    useCreateIndex: true, 
+    useUnifiedTopology: true
+  }
+).then(
+    () => { /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ },
+).catch(err => {
+    console.log(`MongoDB connection error. Please make sure MongoDB is running. ${err}`);
+    // process.exit();
+});
 
 // Global Parameters
 app.set("port", process.env.SERVER_PORT || 3000)
@@ -52,10 +72,16 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(session({ cookie: { maxAge: 60000 }, 
-                  secret: 'secret123456-0-10',
-                  resave: false, 
-                  saveUninitialized: false}));
+app.use(session({ 
+  cookie: { maxAge: 60000 }, 
+  secret: SESSION_SECRET,
+  resave: true, 
+  saveUninitialized: true,
+  store: new MongoStore({
+    url: mongoUrl,
+    autoReconnect: true
+  })
+}));
 app.use(flash())
 
 app.use(lusca.xframe("SAMEORIGIN"))
