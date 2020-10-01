@@ -71,7 +71,7 @@ router.get('helloworld', (req: express.Request, res: express.Response) =>{
 
 app.use((req: express.Request, res: express.Response) =>{
   res.status(404)
-  res.render( 'error', {
+  res.send({
     param: {
       status: 404,
       message: 'not found'
