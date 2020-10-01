@@ -72,23 +72,21 @@ app.get('/', function (req, res) {
 app.post('/', function (req, res) {
   res.send('POST request to the homepage')
 })
-app.get('/ab?cd', function (req, res) {
-  res.send('ab?cd')
-})
-app.get('/ab*cd', function (req, res) {
-  res.send('ab*cd')
-})
+
+
 app.get(/.*fly$/, function (req, res) {
   res.send('/.*fly$/')
 })
+
 app.get('/users/:userId/books/:bookId', function (req, res) {
   res.send(req.params)
 })
 
 //const router = express.Router()
-app.get('/', (req: express.Request, res: express.Response) =>{
+app.get('/index', (req: express.Request, res: express.Response) =>{
    res.render('index')
 })
+
 app.get('/api', (req: express.Request, res: express.Response) =>{
   res.status(200)
   res.send({message: 'hello, world. this is from express typescript applicatoin.'})
