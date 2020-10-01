@@ -24,6 +24,7 @@ import bluebird from "bluebird"
 import morgan from "morgan"
 import logger from "./util/logger"
 
+
 const app: express.Express = express()
 
 // Global Parameters
@@ -59,12 +60,12 @@ app.use(lusca.xssProtection(true))
 app.use('/static', express.static(__dirname + '/public'));
 
 const router = express.Router()
-router.get('helloworld', (req, res) =>{
+router.get('helloworld', (req: express.Request, res: express.Response) =>{
   res.status(200)
   res.send({message: 'hello, world. this is from express typescript applicatoin.'})
 })
 
-app.use((res, req) =>{
+app.use((req: express.Request, res: express.Response) =>{
   res.status(404)
   res.render( 'error', {
     param: {
@@ -73,5 +74,6 @@ app.use((res, req) =>{
     }
   })
 })
+
 
 export default app;
