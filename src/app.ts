@@ -33,7 +33,7 @@ import { MONGODB_URI, SESSION_SECRET } from "./util/secrets"
 const app: express.Express = express()
 
 const MongoStore = mongo(session)
-const mongoUrl = MONGODB_URI;
+const mongoUrl: string = MONGODB_URI | "mongodb:<host>:<port>/<dbname>?<options>";
 mongoose.Promise = bluebird;
 mongoose.connect(mongoUrl, 
   { 
