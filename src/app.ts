@@ -51,13 +51,17 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(session({ cookie: { maxAge: 60000 }, 
+                  secret: 'secret123456-0-10',
+                  resave: false, 
+                  saveUninitialized: false}));
 app.use(flash())
 
 app.use(lusca.xframe("SAMEORIGIN"))
 app.use(lusca.xssProtection(true))
 
 // for static files. like html, js, css, img and so on.
-app.use('/static', express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 const router = express.Router()
 router.get('helloworld', (req: express.Request, res: express.Response) =>{
