@@ -27,6 +27,7 @@ import logger from "./util/logger"
 // For Router
 import userRouter from "./routes/index"
 import Greeter from "./util/test"
+import homeController from "./controllers/homeController"
 
 // For .env parameters.
 //import { MONGODB_URI, SESSION_SECRET } from "./util/secrets"
@@ -96,7 +97,8 @@ app.use(lusca.xssProtection(true))
 app.use(express.static(__dirname + '/public'));
 
 // Router from subfiles.
-app.use("/user", userRouter)
+//app.use("/user", userRouter)
+app.use("/", userRouter)
 
 // GET method route
 app.get('/', function (req, res) {
@@ -105,7 +107,6 @@ app.get('/', function (req, res) {
   res.send('<h1>Hello,world</h1> <hr> This is GET request to the homepage.and '+greeter.greeting + " <hr>secretkey:"+greeter.secretKey+"<hr> username:" +greeter.username);
 })
 
-//const router = express.Router()
 app.get('/index', (req: express.Request, res: express.Response) =>{
    res.render('index')
 })
@@ -115,8 +116,6 @@ app.get('/api', (req: express.Request, res: express.Response) =>{
   res.send({message: 'hello, world. this is from express typescript applicatoin.'})
 })
 
-app.get('/home', (req: express.Request, res: express.Response) =>{
-  res.render('home')
-})
+app.get('/home', homeController.index)
 
 export default app;
