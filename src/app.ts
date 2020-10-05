@@ -26,6 +26,7 @@ import logger from "./util/logger"
 
 // For Router
 import userRouter from "./routes/index"
+import Greeter from "./util/test"
 
 // For .env parameters.
 //import { MONGODB_URI, SESSION_SECRET } from "./util/secrets"
@@ -98,7 +99,9 @@ app.use("/user", userRouter)
 
 // GET method route
 app.get('/', function (req, res) {
-  res.send('<h1>Hello,world</h1> <hr> This is GET request to the homepage.')
+  const greeter = new Greeter("lqwangxg");
+  greeter.showGreeting()
+  res.send('<h1>Hello,world</h1> <hr> This is GET request to the homepage.and '+greeter.greeting)
 })
 
 //const router = express.Router()
