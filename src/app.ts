@@ -101,7 +101,7 @@ app.use("/user", userRouter)
 app.get('/', function (req, res) {
   const greeter = new Greeter("lqwangxg");
   greeter.showGreeting()
-  res.send('<h1>Hello,world</h1> <hr> This is GET request to the homepage.and '+greeter.greeting)
+  res.send('<h1>Hello,world</h1> <hr> This is GET request to the homepage.and '+greeter.greeting + " <hr>secretkey:"+greeter.secretKey);
 })
 
 //const router = express.Router()
