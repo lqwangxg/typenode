@@ -33,9 +33,10 @@ import Greeter from "./util/test"
 import * as sec from "./util/secrets"
 
 const app: express.Express = express()
+const greeter = new Greeter("lqwangxg");
 
 const MongoStore = mongo(session)
-const mongoUrl = "";
+const mongoUrl = greeter.mongoUrl;
 mongoose.Promise = bluebird;
 if(mongoUrl){
   mongoose.connect(mongoUrl, 
@@ -77,13 +78,13 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(session({ 
   cookie: { maxAge: 60000 }, 
-  secret: 'SESSION_SECRET',
+  secret: greeter.secretKey,
   resave: true, 
   saveUninitialized: true,
-  //store: new MongoStore({
-  //  url: sec.mongoUrl,
-  //  autoReconnect: true
-  //})
+  store: new MongoStore({
+    url: mongoUrl,
+    autoReconnect: true
+  })
 
 }));
 app.use(flash())
@@ -99,7 +100,6 @@ app.use("/user", userRouter)
 
 // GET method route
 app.get('/', function (req, res) {
-  const greeter = new Greeter("lqwangxg");
   greeter.showGreeting();
   greeter.changeUserName("桃太郎");
   res.send('<h1>Hello,world</h1> <hr> This is GET request to the homepage.and '+greeter.greeting + " <hr>secretkey:"+greeter.secretKey+"<hr> username:" +greeter.username);
