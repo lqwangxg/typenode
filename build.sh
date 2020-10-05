@@ -7,4 +7,4 @@ docker run -it --rm  \
  -v $app_name:/app\
  -v ~/.npm/:/root/.npm/\
  $builder_name \
- sh -c 'npm install && npm run build'
+ sh -c 'npm run build'

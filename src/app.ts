@@ -28,26 +28,28 @@ import logger from "./util/logger"
 import userRouter from "./routes/index"
 
 // For .env parameters.
-import { MONGODB_URI, SESSION_SECRET } from "./util/secrets"
+//import { MONGODB_URI, SESSION_SECRET } from "./util/secrets"
+import * as sec from "./util/secrets"
 
 const app: express.Express = express()
 
 const MongoStore = mongo(session)
-const mongoUrl: string = MONGODB_URI | "mongodb:<host>:<port>/<dbname>?<options>";
+const mongoUrl = "";
 mongoose.Promise = bluebird;
-mongoose.connect(mongoUrl, 
+if(mongoUrl){
+  mongoose.connect(mongoUrl, 
   { 
     useNewUrlParser: true, 
     useCreateIndex: true, 
     useUnifiedTopology: true
   }
-).then(
+  ).then(
     () => { /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ },
-).catch(err => {
+  ).catch(err => {
     console.log(`MongoDB connection error. Please make sure MongoDB is running. ${err}`);
     // process.exit();
-});
-
+  });
+}
 // Global Parameters
 app.set("port", process.env.SERVER_PORT || 3000)
 app.set("mode", process.env.MODE || 'development')
@@ -74,13 +76,14 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(session({ 
   cookie: { maxAge: 60000 }, 
-  secret: SESSION_SECRET,
+  secret: 'SESSION_SECRET',
   resave: true, 
   saveUninitialized: true,
-  store: new MongoStore({
-    url: mongoUrl,
-    autoReconnect: true
-  })
+  //store: new MongoStore({
+  //  url: sec.mongoUrl,
+  //  autoReconnect: true
+  //})
+
 }));
 app.use(flash())
 
@@ -90,25 +93,12 @@ app.use(lusca.xssProtection(true))
 // for static files. like html, js, css, img and so on.
 app.use(express.static(__dirname + '/public'));
 
+// Router from subfiles.
 app.use("/user", userRouter)
 
 // GET method route
 app.get('/', function (req, res) {
-  res.send('GET request to the homepage')
-})
-
-// POST method route
-app.post('/', function (req, res) {
-  res.send('POST request to the homepage')
-})
-
-
-app.get(/.*fly$/, function (req, res) {
-  res.send('/.*fly$/')
-})
-
-app.get('/users/:userId/books/:bookId', function (req, res) {
-  res.send(req.params)
+  res.send('<h1>Hello,world</h1> <hr> This is GET request to the homepage.')
 })
 
 //const router = express.Router()
