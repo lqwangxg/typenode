@@ -30,9 +30,3 @@ elif [ $1 = 'debug' ]; then
   # Method2: run docker service by docker-compose.yml
   docker-compose -f $stack_yml up
 fi
-
-function isRunning() {
-  if [ $? =0 ]; then 
-    echo "is running"
-  fi
-}

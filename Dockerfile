@@ -1,6 +1,6 @@
 FROM lqwangxg/node AS builder
 WORKDIR /app
-OPY package*.json /app/
+COPY package*.json /app/
 RUN npm install
 COPY . /app/
 RUN npm run build
